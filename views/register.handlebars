@@ -1,0 +1,104 @@
+<div class="d-flex justify-content-center align-items-center vh-100" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh;">
+    <div class="col-md-4 mx-auto mx-sm-5">
+        <div class="card shadow-lg border-0" style="border-radius: 1rem; backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.95);">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <h1 class="fw-bold mb-2" style="color: #2c3e50; font-size: 2rem;">Create Account</h1>
+                    <p class="text-muted">Join us today</p>
+                </div>
+
+                <form id="registerForm">
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold text-dark required mb-2">Full Name</label>
+                        <div class="position-relative">
+                            <input id="fullname" type="text" class="form-control form-control-lg border-0 shadow-sm" 
+                                   style="border-radius: 0.75rem; background: #f8f9fa; padding: 0.75rem 1rem; transition: all 0.3s ease;" 
+                                   aria-describedby="emailHelp" placeholder="Enter your full name"
+                                   onfocus="this.style.background='#fff'; this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'"
+                                   onblur="this.style.background='#f8f9fa'; this.style.boxShadow='none'">
+                            <small class="form-text text-muted mt-2 d-block" style="font-size: 0.875rem;">Provide your full name.</small>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold text-dark required mb-2">Email address</label>
+                        <div class="position-relative">
+                            <input id="email" type="email" class="form-control form-control-lg border-0 shadow-sm" 
+                                   style="border-radius: 0.75rem; background: #f8f9fa; padding: 0.75rem 1rem; transition: all 0.3s ease;" 
+                                   aria-describedby="emailHelp" placeholder="Enter your email"
+                                   onfocus="this.style.background='#fff'; this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'"
+                                   onblur="this.style.background='#f8f9fa'; this.style.boxShadow='none'">
+                            <small class="form-text text-muted mt-2 d-block" style="font-size: 0.875rem;">We'll never share your email with anyone else.</small>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold text-dark required mb-2">Password</label>
+                        <div class="position-relative">
+                            <input id="password" type="password" class="form-control form-control-lg border-0 shadow-sm" 
+                                   style="border-radius: 0.75rem; background: #f8f9fa; padding: 0.75rem 1rem; transition: all 0.3s ease;" 
+                                   placeholder="Create a password"
+                                   onfocus="this.style.background='#fff'; this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'"
+                                   onblur="this.style.background='#f8f9fa'; this.style.boxShadow='none'">
+                            <small class="form-text text-muted mt-2 d-block" style="font-size: 0.875rem;">
+                                Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end mb-4">
+                        <a href="/auth/login" class="text-decoration-none fw-medium" 
+                           style="color: #667eea; transition: color 0.3s ease;"
+                           onmouseover="this.style.color='#5a67d8'" 
+                           onmouseout="this.style.color='#667eea'">
+                           Have an Account? Login
+                        </a>
+                    </div>
+
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-lg px-5 py-3 fw-semibold border-0" 
+                                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 0.75rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);"
+                                onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(102, 126, 234, 0.4)'"
+                                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.3)'">
+                            Create Account
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        $("#registerForm").on("submit", function(e){
+            e.preventDefault();
+
+            const fullname = $("#fullname").val().trim()
+            const email = $("#email").val().trim()
+            const password = $("#password").val().trim()
+
+           if (fullname === "" || email === "" || password === ""){
+            alert("fill in all the forms please ")
+           }
+
+           if (password.length < 8 || password.length > 20){
+            alert("password must be between 8-20 characters")
+           }
+
+           $.ajax({
+            url: "/auth/register",
+            type: "POST",
+            data: { name: fullname, email, password},
+            success: function(response) {
+                alert(response.message);
+                console.log(response)
+            },
+            error: function(xhr) {
+                alert(xhr.responseJSON.message);
+                console.error(xhr.responseJSON);
+            }
+           })
+        })
+    })
+</script>

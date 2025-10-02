@@ -1,0 +1,826 @@
+
+   
+    <div class="container py-4">
+        <!-- Progress Steps -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10">
+                <div class="card border-0 shadow-sm" style="border-radius: 1rem;">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="step-item active" id="step1">
+                                <div class="step-circle">1</div>
+                                <span class="step-text">Select Event</span>
+                            </div>
+                            <div class="step-line"></div>
+                            <div class="step-item" id="step2">
+                                <div class="step-circle">2</div>
+                                <span class="step-text">Choose Seats</span>
+                            </div>
+                            <div class="step-line"></div>
+                            <div class="step-item" id="step3">
+                                <div class="step-circle">3</div>
+                                <span class="step-text">Payment</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 1: Event Selection -->
+        <div id="eventStep" class="booking-step">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold" style="color: #2c3e50;">Select Your Event</h2>
+                <p class="text-muted">Choose from our upcoming exciting events</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="event-card" data-event-id="1">
+                        <div class="event-header">
+                            <div class="event-icon">⚽</div>
+                            <h5 class="fw-bold text-white mb-2">Premier League Match</h5>
+                            <p class="text-white-50 mb-0">Gumel FC vs Jigawa United</p>
+                        </div>
+                        <div class="event-body">
+                            <div class="event-info">
+                                <div class="info-item">
+                                    <small class="text-muted">DATE</small>
+                                    <div class="fw-bold">Sept 25, 2024</div>
+                                </div>
+                                <div class="info-item">
+                                    <small class="text-muted">TIME</small>
+                                    <div class="fw-bold">4:00 PM</div>
+                                </div>
+                                <div class="info-item">
+                                    <small class="text-muted">FROM</small>
+                                    <div class="fw-bold text-success">₦1,500</div>
+                                </div>
+                            </div>
+                            <div class="availability-badge available">Available</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="event-card concert" data-event-id="2">
+                        <div class="event-header">
+                            <div class="event-icon">🎵</div>
+                            <h5 class="fw-bold text-white mb-2">Music Concert</h5>
+                            <p class="text-white-50 mb-0">Northern Stars Live</p>
+                        </div>
+                        <div class="event-body">
+                            <div class="event-info">
+                                <div class="info-item">
+                                    <small class="text-muted">DATE</small>
+                                    <div class="fw-bold">Oct 5, 2024</div>
+                                </div>
+                                <div class="info-item">
+                                    <small class="text-muted">TIME</small>
+                                    <div class="fw-bold">7:00 PM</div>
+                                </div>
+                                <div class="info-item">
+                                    <small class="text-muted">FROM</small>
+                                    <div class="fw-bold text-success">₦3,000</div>
+                                </div>
+                            </div>
+                            <div class="availability-badge limited">Few Left</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="event-card championship" data-event-id="3">
+                        <div class="event-header">
+                            <div class="event-icon">🏆</div>
+                            <h5 class="fw-bold text-white mb-2">Championship Final</h5>
+                            <p class="text-white-50 mb-0">State Cup Final</p>
+                        </div>
+                        <div class="event-body">
+                            <div class="event-info">
+                                <div class="info-item">
+                                    <small class="text-muted">DATE</small>
+                                    <div class="fw-bold">Oct 15, 2024</div>
+                                </div>
+                                <div class="info-item">
+                                    <small class="text-muted">TIME</small>
+                                    <div class="fw-bold">3:00 PM</div>
+                                </div>
+                                <div class="info-item">
+                                    <small class="text-muted">FROM</small>
+                                    <div class="fw-bold text-success">₦2,500</div>
+                                </div>
+                            </div>
+                            <div class="availability-badge available">Available</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Seat Selection -->
+        <div id="seatStep" class="booking-step" style="display: none;">
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="card border-0 shadow-lg" style="border-radius: 1rem;">
+                        <div class="card-header bg-transparent border-0 p-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h4 class="fw-bold mb-1">Choose Your Seats</h4>
+                                    <p class="text-muted mb-0" id="selectedEventInfo"></p>
+                                </div>
+                                <button class="btn btn-outline-secondary btn-sm" id="backToEventsBtn">
+                                    ← Back to Events
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body p-4">
+                            <!-- Stadium Layout -->
+                            <div class="stadium-container">
+                                <div class="field-section">
+                                    <div class="field">⚽ PLAYING FIELD ⚽</div>
+                                </div>
+
+                                <!-- VIP Section -->
+                                <div class="seating-section">
+                                    <div class="section-label">VIP SECTION - ₦5,000</div>
+                                    <div class="seats-row" id="vip-seats"></div>
+                                </div>
+
+                                <!-- Premium Section -->
+                                <div class="seating-section">
+                                    <div class="section-label">PREMIUM SECTION - ₦3,000</div>
+                                    <div id="premium-seats"></div>
+                                </div>
+
+                                <!-- Regular Section -->
+                                <div class="seating-section">
+                                    <div class="section-label">REGULAR SECTION - ₦1,500</div>
+                                    <div id="regular-seats"></div>
+                                </div>
+                            </div>
+
+                            <!-- Seat Legend -->
+                            <div class="seat-legend-container">
+                                <div class="legend-item">
+                                    <div class="seat-demo available"></div>
+                                    <span>Available</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="seat-demo selected"></div>
+                                    <span>Selected</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="seat-demo occupied"></div>
+                                    <span>Occupied</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card border-0 shadow-lg sticky-top" style="border-radius: 1rem; top: 2rem;">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold mb-4">Booking Summary</h5>
+                            
+                            <div class="event-summary mb-4">
+                                <div class="fw-semibold mb-2" id="summaryEventTitle"></div>
+                                <small class="text-muted" id="summaryEventDate"></small>
+                            </div>
+
+                            <div class="selected-seats-container mb-4">
+                                <div class="fw-semibold mb-2">Selected Seats:</div>
+                                <div id="selectedSeatsList" class="text-muted">No seats selected</div>
+                            </div>
+
+                            <div class="pricing-breakdown">
+                                <div class="price-row">
+                                    <span>Tickets:</span>
+                                    <span id="ticketCount">0</span>
+                                </div>
+                                <div class="price-row">
+                                    <span>Subtotal:</span>
+                                    <span id="subtotal">₦0</span>
+                                </div>
+                                <div class="price-row">
+                                    <span>Service Fee:</span>
+                                    <span id="serviceFee">₦0</span>
+                                </div>
+                                <hr>
+                                <div class="price-row total">
+                                    <span class="fw-bold">Total:</span>
+                                    <span class="fw-bold" id="totalAmount">₦0</span>
+                                </div>
+                            </div>
+
+                            <button id="continueToPayment" class="btn btn-primary btn-lg w-100 mt-4" disabled>
+                                Continue to Payment
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Payment -->
+        <div id="paymentStep" class="booking-step" style="display: none;">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card border-0 shadow-lg" style="border-radius: 1rem;">
+                        <div class="card-header bg-transparent border-0 p-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h4 class="fw-bold mb-0">Complete Your Booking</h4>
+                                <button class="btn btn-outline-secondary btn-sm" id="backToSeatsBtn">
+                                    ← Back to Seats
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="row g-4">
+                                <div class="col-lg-8">
+                                    <form id="paymentForm">
+                                        <h5 class="fw-bold mb-3">Customer Information</h5>
+                                        <div class="row g-3 mb-4">
+                                            <div class="col-md-6">
+                                                <label class="form-label">First Name *</label>
+                                                <input type="text" class="form-control" name="firstName" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Last Name *</label>
+                                                <input type="text" class="form-control" name="lastName" required>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label">Email Address *</label>
+                                                <input type="email" class="form-control" name="email" required>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label">Phone Number *</label>
+                                                <input type="tel" class="form-control" name="phone" required>
+                                            </div>
+                                        </div>
+
+                                        <h5 class="fw-bold mb-3">Payment Method</h5>
+                                        <div class="payment-methods mb-4">
+                                            <div class="payment-option active" data-method="card">
+                                                <div class="payment-icon">💳</div>
+                                                <div class="payment-details">
+                                                    <div class="fw-semibold">Credit/Debit Card</div>
+                                                    <small class="text-muted">Visa, Mastercard, Verve</small>
+                                                </div>
+                                            </div>
+                                            <div class="payment-option" data-method="bank">
+                                                <div class="payment-icon">🏦</div>
+                                                <div class="payment-details">
+                                                    <div class="fw-semibold">Bank Transfer</div>
+                                                    <small class="text-muted">Direct bank payment</small>
+                                                </div>
+                                            </div>
+                                            <div class="payment-option" data-method="mobile">
+                                                <div class="payment-icon">📱</div>
+                                                <div class="payment-details">
+                                                    <div class="fw-semibold">Mobile Money</div>
+                                                    <small class="text-muted">MTN, Airtel, 9Mobile</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="cardPayment" class="payment-form">
+                                            <div class="row g-3">
+                                                <div class="col-12">
+                                                    <label class="form-label">Card Number *</label>
+                                                    <input type="text" class="form-control" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" id="cardNumber">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Expiry Date *</label>
+                                                    <input type="text" class="form-control" name="expiryDate" placeholder="MM/YY" maxlength="5" id="expiryDate">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">CVV *</label>
+                                                    <input type="text" class="form-control" name="cvv" placeholder="123" maxlength="3" id="cvv">
+                                                </div>
+                                                <div class="col-12">
+                                                    <label class="form-label">Cardholder Name *</label>
+                                                    <input type="text" class="form-control" name="cardholderName">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="bankPayment" class="payment-form" style="display: none;">
+                                            <div class="alert alert-info">
+                                                <h6 class="fw-bold">Bank Transfer Details</h6>
+                                                <p class="mb-1"><strong>Bank:</strong> First Bank of Nigeria</p>
+                                                <p class="mb-1"><strong>Account Name:</strong> Gumel Stadium Bookings</p>
+                                                <p class="mb-1"><strong>Account Number:</strong> 1234567890</p>
+                                                <p class="mb-0">Please use your booking reference as payment description.</p>
+                                            </div>
+                                        </div>
+
+                                        <div id="mobilePayment" class="payment-form" style="display: none;">
+                                            <div class="row g-3">
+                                                <div class="col-12">
+                                                    <label class="form-label">Mobile Network *</label>
+                                                    <select class="form-select" name="mobileNetwork">
+                                                        <option>Select Network</option>
+                                                        <option>MTN</option>
+                                                        <option>Airtel</option>
+                                                        <option>9Mobile</option>
+                                                        <option>Glo</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12">
+                                                    <label class="form-label">Phone Number *</label>
+                                                    <input type="tel" class="form-control" name="mobilePhone" placeholder="08012345678">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-success btn-lg w-100 mt-4">
+                                            Complete Payment - <span id="finalAmount">₦0</span>
+                                        </button>
+                                    </form>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="order-summary">
+                                        <h6 class="fw-bold mb-3">Order Summary</h6>
+                                        <div class="summary-item">
+                                            <div class="fw-semibold" id="finalEventTitle"></div>
+                                            <small class="text-muted" id="finalEventDate"></small>
+                                        </div>
+                                        <div class="summary-seats mb-3" id="finalSelectedSeats"></div>
+                                        <div class="summary-pricing">
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span>Tickets:</span>
+                                                <span id="finalTicketCount">0</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span>Subtotal:</span>
+                                                <span id="finalSubtotal">₦0</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span>Service Fee:</span>
+                                                <span id="finalServiceFee">₦0</span>
+                                            </div>
+                                            <hr>
+                                            <div class="d-flex justify-content-between fw-bold fs-5">
+                                                <span>Total:</span>
+                                                <span id="finalTotal">₦0</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        $(function() {
+
+            let selectedSeats = [];
+            let currentStep = 1
+            let selectedEvent = null;
+            let currentPaymentMethod = 'card'
+
+            const events = {
+                1: {
+                    title: 'Premier League Match',
+                    subtitle: 'Gumel FC vs Jigawa United',
+                    date: 'Sept 25, 2024',
+                    time: '4:00 PM',
+                    prices: { regular: 1500, premium: 3000, vip: 5000 }
+                },
+                2: {
+                    title: 'Music Concert',
+                    subtitle: 'Northern Stars Live',
+                    date: 'Oct 5, 2024',
+                    time: '7:00 PM',
+                    prices: { regular: 3000, premium: 5000, vip: 8000 }
+                },
+                3: {
+                    title: 'Championship Final',
+                    subtitle: 'State Cup Final',
+                    date: 'Oct 15, 2024',
+                    time: '3:00 PM',
+                    prices: { regular: 2500, premium: 4500, vip: 7000 }
+                }
+            };
+
+
+
+            $('.event-card').on('click', (e) => {
+                console.log('clicked', $(e.currentTarget).attr('data-event-id'))
+                $('#eventStep').hide()
+                $('#seatStep').css('display','flex')
+                this.currentStep = $(e.currentTarget).attr('data-event-id')
+                $()
+            })
+
+        })
+    </script>
+
+
+     <style>
+        /* Step Progress Styles */
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            flex: 1;
+        }
+
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #e9ecef;
+            color: #6c757d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .step-item.active .step-circle {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .step-text {
+            font-weight: 600;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .step-item.active .step-text {
+            color: #3498db;
+        }
+
+        .step-line {
+            height: 2px;
+            background: #e9ecef;
+            flex: 1;
+            margin: 0 1rem;
+            margin-top: -25px;
+            z-index: -1;
+        }
+
+        /* Event Card Styles */
+        .event-card {
+            border-radius: 1rem;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .event-header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .event-card.concert .event-header {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .event-card.championship .event-header {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        .event-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .event-body {
+            padding: 1.5rem;
+        }
+
+        .event-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .availability-badge {
+            text-align: center;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .availability-badge.available {
+            background: rgba(39, 174, 96, 0.1);
+            color: #27ae60;
+        }
+
+        .availability-badge.limited {
+            background: rgba(243, 156, 18, 0.1);
+            color: #f39c12;
+        }
+
+        /* Stadium Layout Styles */
+        .stadium-container {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .field-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .field {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .seating-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-label {
+            text-align: center;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .seats-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .seat {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin: 2px;
+        }
+
+        .seat.available {
+            background: #e9ecef;
+            border: 2px solid #dee2e6;
+            color: #6c757d;
+        }
+
+        .seat.available:hover {
+            background: #3498db;
+            border-color: #2980b9;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .seat.selected {
+            background: #27ae60;
+            border: 2px solid #229954;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .seat.occupied {
+            background: #e74c3c;
+            border: 2px solid #c0392b;
+            color: white;
+            cursor: not-allowed;
+        }
+
+        /* Seat Legend */
+        .seat-legend-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .seat-demo {
+            width: 25px;
+            height: 25px;
+            border-radius: 6px;
+        }
+
+        .seat-demo.available {
+            background: #e9ecef;
+            border: 2px solid #dee2e6;
+        }
+
+        .seat-demo.selected {
+            background: #27ae60;
+            border: 2px solid #229954;
+        }
+
+        .seat-demo.occupied {
+            background: #e74c3c;
+            border: 2px solid #c0392b;
+        }
+
+        /* Booking Summary */
+        .event-summary {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .pricing-breakdown {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-row.total {
+            font-size: 1.1rem;
+        }
+
+        /* Payment Styles */
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .payment-option {
+            border: 2px solid #e9ecef;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-option:hover {
+            border-color: #3498db;
+            background: rgba(52, 152, 219, 0.05);
+        }
+
+        .payment-option.active {
+            border-color: #3498db;
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        .payment-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .payment-details {
+            flex: 1;
+        }
+
+        .payment-form {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            height: fit-content;
+        }
+
+        .summary-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .summary-seats {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .summary-pricing {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        /* Form Styles */
+        .form-control, .form-select {
+            border-radius: 0.5rem;
+            border: 2px solid #e9ecef;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+
+        /* Animation Classes */
+        .booking-step {
+            animation: fadeInSlide 0.5s ease-out;
+        }
+
+        @keyframes fadeInSlide {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Selected Seats List */
+        .selected-seat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .step-text {
+                font-size: 0.8rem;
+            }
+            
+            .event-info {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .seat {
+                width: 25px;
+                height: 25px;
+                font-size: 0.7rem;
+            }
+            
+            .payment-methods {
+                gap: 0.75rem;
+            }
+            
+            .payment-option {
+                padding: 0.75rem;
+            }
+            
+            .seat-legend-container {
+                gap: 1rem;
+            }
+        }
+    </style>

@@ -1,0 +1,489 @@
+<!-- Customer Dashboard -->
+<div class="dashboard-container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-5 fw-bold text-white mb-3">Welcome back, John!</h1>
+                    <p class="lead text-white-50 mb-4">Manage your bookings and discover upcoming events</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a href="/book-tickets" class="btn btn-primary btn-lg px-4">
+                        Book New Tickets
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div class="container py-5">
+        <!-- Quick Stats -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-icon">🎟️</div>
+                    <div class="stat-content">
+                        <h3 class="stat-number">12</h3>
+                        <p class="stat-label">Total Bookings</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-content">
+                        <h3 class="stat-number">3</h3>
+                        <p class="stat-label">Upcoming Events</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-content">
+                        <h3 class="stat-number">₦45,500</h3>
+                        <p class="stat-label">Total Spent</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-content">
+                        <h3 class="stat-number">Gold</h3>
+                        <p class="stat-label">Member Status</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="row g-4">
+            <!-- Recent Bookings -->
+            <div class="col-lg-8">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h4 class="mb-0">Recent Bookings</h4>
+                        <a href="/reservations" class="btn btn-outline-primary btn-sm">View All</a>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="booking-item">
+                            <div class="booking-info">
+                                <div class="booking-event">Premier League Match</div>
+                                <div class="booking-details">Gumel FC vs Jigawa United • Sept 25, 2024</div>
+                                <div class="booking-seats">VIP Section • 2 seats</div>
+                            </div>
+                            <div class="booking-status">
+                                <span class="status-badge confirmed">Confirmed</span>
+                                <div class="booking-amount">₦10,000</div>
+                            </div>
+                        </div>
+                        
+                        <div class="booking-item">
+                            <div class="booking-info">
+                                <div class="booking-event">Music Concert</div>
+                                <div class="booking-details">Northern Stars Live • Oct 5, 2024</div>
+                                <div class="booking-seats">Premium Section • 4 seats</div>
+                            </div>
+                            <div class="booking-status">
+                                <span class="status-badge pending">Pending</span>
+                                <div class="booking-amount">₦20,000</div>
+                            </div>
+                        </div>
+                        
+                        <div class="booking-item">
+                            <div class="booking-info">
+                                <div class="booking-event">Championship Final</div>
+                                <div class="booking-details">State Cup Final • Oct 15, 2024</div>
+                                <div class="booking-seats">Regular Section • 3 seats</div>
+                            </div>
+                            <div class="booking-status">
+                                <span class="status-badge confirmed">Confirmed</span>
+                                <div class="booking-amount">₦7,500</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Upcoming Events -->
+                <div class="content-card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Upcoming Events</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="event-item">
+                            <div class="event-date">
+                                <div class="date-day">25</div>
+                                <div class="date-month">Sep</div>
+                            </div>
+                            <div class="event-info">
+                                <div class="event-title">Premier League</div>
+                                <div class="event-time">4:00 PM</div>
+                            </div>
+                        </div>
+                        
+                        <div class="event-item">
+                            <div class="event-date">
+                                <div class="date-day">05</div>
+                                <div class="date-month">Oct</div>
+                            </div>
+                            <div class="event-info">
+                                <div class="event-title">Music Concert</div>
+                                <div class="event-time">7:00 PM</div>
+                            </div>
+                        </div>
+                        
+                        <div class="event-item">
+                            <div class="event-date">
+                                <div class="date-day">15</div>
+                                <div class="date-month">Oct</div>
+                            </div>
+                            <div class="event-info">
+                                <div class="event-title">Championship</div>
+                                <div class="event-time">3:00 PM</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="content-card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Quick Actions</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="quick-actions">
+                            <a href="/book-tickets" class="action-btn">
+                                <div class="action-icon">🎟️</div>
+                                <span>Book Tickets</span>
+                            </a>
+                            <a href="/reservations" class="action-btn">
+                                <div class="action-icon">📋</div>
+                                <span>My Bookings</span>
+                            </a>
+                            <a href="/profile" class="action-btn">
+                                <div class="action-icon">👤</div>
+                                <span>Profile</span>
+                            </a>
+                            <a href="/events" class="action-btn">
+                                <div class="action-icon">🎭</div>
+                                <span>Browse Events</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Dashboard Styles */
+.dashboard-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    padding: 4rem 0;
+    margin-bottom: 0;
+}
+
+/* Stat Cards */
+.stat-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border-radius: 1rem;
+    filter: grayscale(0);
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+    line-height: 1;
+}
+
+.stat-label {
+    color: #6c757d;
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Content Cards */
+.content-card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #f1f3f4;
+    display: flex;
+    justify-content: between;
+    align-items: center;
+    background: #fafbfc;
+}
+
+.card-header h4, .card-header h5 {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Booking Items */
+.booking-item {
+    display: flex;
+    justify-content: between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #f1f3f4;
+    transition: background 0.2s ease;
+}
+
+.booking-item:last-child {
+    border-bottom: none;
+}
+
+.booking-item:hover {
+    background: #f8f9fa;
+}
+
+.booking-info {
+    flex: 1;
+}
+
+.booking-event {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.booking-details {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+.booking-seats {
+    color: #495057;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.booking-status {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 0.5rem;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.confirmed {
+    background: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+.status-badge.pending {
+    background: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+}
+
+.booking-amount {
+    font-weight: 700;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+/* Event Items */
+.event-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f1f3f4;
+}
+
+.event-item:last-child {
+    border-bottom: none;
+}
+
+.event-date {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    text-align: center;
+    min-width: 60px;
+}
+
+.date-day {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.date-month {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 0.25rem;
+}
+
+.event-info {
+    flex: 1;
+}
+
+.event-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
+}
+
+.event-time {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* Quick Actions */
+.quick-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem 1rem;
+    background: #f8f9fa;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.action-btn:hover {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.action-icon {
+    font-size: 1.5rem;
+}
+
+.action-btn span {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+/* Button Styles */
+.btn-primary {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border: none;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+}
+
+.btn-outline-primary {
+    border: 2px solid #3498db;
+    color: #3498db;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background: #3498db;
+    border-color: #3498db;
+    transform: translateY(-1px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 2rem 0;
+        text-align: center;
+    }
+    
+    .stat-card {
+        padding: 1.5rem;
+    }
+    
+    .booking-item {
+        flex-direction: column;
+        align-items: start;
+        gap: 1rem;
+    }
+    
+    .booking-status {
+        align-items: start;
+        flex-direction: row;
+        gap: 1rem;
+    }
+    
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
