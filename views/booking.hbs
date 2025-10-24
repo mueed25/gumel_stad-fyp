@@ -1,0 +1,450 @@
+<div class="page-wrapper">
+    <div class="page-body">
+        <div class="container-xl py-4">
+            <div class="row g-4">
+                <!-- Main Booking Section -->
+                <div class="col-lg-8">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-white border-bottom">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h2 class="card-title mb-1">{{event.title}}</h2>
+                                    <div class="text-muted">
+                                        <span class="me-3">{{event.subtitle}}</span>
+                                        <span class="me-3">📅 {{formatDate event.date}}</span>
+                                        <span>🕐 {{event.time}}</span>
+                                    </div>
+                                </div>
+                                <a href="/events" class="btn btn-ghost-secondary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M5 12l6 6" /><path d="M5 12l6 -6" /></svg>
+                                    Back to Events
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <!-- Playing Field Indicator -->
+                            <div class="alert alert-success text-center mb-4" role="alert">
+                                <strong>⚽ PLAYING FIELD</strong>
+                            </div>
+
+                            <!-- VIP Section -->
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="mb-0">
+                                        <span class="badge bg-purple-lt text-purple">VIP SECTION</span>
+                                    </h5>
+                                    <span class="text-muted">₦{{event.prices.vip}} per seat</span>
+                                </div>
+                                <div id="vip-seats" class="seat-grid"></div>
+                            </div>
+
+                            <!-- Premium Section -->
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="mb-0">
+                                        <span class="badge bg-blue-lt text-blue">PREMIUM SECTION</span>
+                                    </h5>
+                                    <span class="text-muted">₦{{event.prices.premium}} per seat</span>
+                                </div>
+                                <div id="premium-seats" class="seat-grid"></div>
+                            </div>
+
+                            <!-- Regular Section -->
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="mb-0">
+                                        <span class="badge bg-cyan-lt text-cyan">REGULAR SECTION</span>
+                                    </h5>
+                                    <span class="text-muted">₦{{event.prices.regular}} per seat</span>
+                                </div>
+                                <div id="regular-seats" class="seat-grid"></div>
+                            </div>
+
+                            <!-- Legend -->
+                            <div class="d-flex justify-content-center gap-4 mt-4 p-3 bg-light rounded">
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="seat-legend seat-available"></span>
+                                    <small>Available</small>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="seat-legend seat-selected"></span>
+                                    <small>Selected</small>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="seat-legend seat-occupied"></span>
+                                    <small>Occupied</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking Summary Sidebar -->
+                <div class="col-lg-4">
+                    <div class="card shadow-sm position-sticky" style="top: 1rem;">
+                        <div class="card-header bg-white">
+                            <h4 class="card-title mb-0">Booking Summary</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-info mb-3">
+                                <div class="fw-bold">{{event.title}}</div>
+                                <small class="text-muted">{{formatDate event.date}} at {{event.time}}</small>
+                            </div>
+
+                            <div class="mb-3">
+                                <strong class="d-block mb-2">Selected Seats:</strong>
+                                <div id="seats-list" class="text-muted small">
+                                    <em>No seats selected yet</em>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="row mb-2">
+                                    <div class="col">Number of Tickets:</div>
+                                    <div class="col-auto"><strong id="ticket-count">0</strong></div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col">Subtotal:</div>
+                                    <div class="col-auto"><strong id="subtotal">₦0</strong></div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col">Service Fee (5%):</div>
+                                    <div class="col-auto"><strong id="service-fee">₦0</strong></div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col"><strong>Total Amount:</strong></div>
+                                    <div class="col-auto"><strong class="text-success fs-3" id="total">₦0</strong></div>
+                                </div>
+                            </div>
+
+                            <button id="checkout-btn" class="btn btn-success w-100 btn-lg" disabled>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M18 13l-6 6" /><path d="M6 13l6 6" /></svg>
+                                Proceed to Payment
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Payment Modal -->
+<div class="modal modal-blur fade" id="paymentModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Complete Your Booking</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="payment-form">
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-control" name="firstName" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-control" name="lastName" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" name="phone" required>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <strong>Total Amount:</strong> <span id="final-total" class="float-end fs-3 text-success">₦0</span>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100 btn-lg" id="pay-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 11a7 7 0 0 1 14 0v7a1.78 1.78 0 0 1 -3.1 1.4a1.65 1.65 0 0 0 -2.6 0a1.65 1.65 0 0 1 -2.6 0a1.65 1.65 0 0 0 -2.6 0a1.78 1.78 0 0 1 -3.1 -1.4v-7" /><path d="M8 3m0 1a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1v3a1 1 0 0 1 -1 1h-6a1 1 0 0 1 -1 -1z" /></svg>
+                        Pay with Paystack
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Paystack Inline JS -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
+<style>
+.seat-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.seat-row {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.seat-btn {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    background: #f8f9fa;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.seat-btn:hover:not(:disabled) {
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.seat-btn.seat-available {
+    background: #ffffff;
+    border-color: #cbd5e1;
+    color: #475569;
+}
+
+.seat-btn.seat-selected {
+    background: #20c997;
+    border-color: #20c997;
+    color: white;
+}
+
+.seat-btn.seat-occupied {
+    background: #dc3545;
+    border-color: #dc3545;
+    color: white;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.seat-legend {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    display: inline-block;
+    border: 2px solid #ddd;
+}
+
+.seat-legend.seat-available {
+    background: #ffffff;
+    border-color: #cbd5e1;
+}
+
+.seat-legend.seat-selected {
+    background: #20c997;
+    border-color: #20c997;
+}
+
+.seat-legend.seat-occupied {
+    background: #dc3545;
+    border-color: #dc3545;
+}
+
+#seats-list .seat-badge {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    background-color: #206bc4;
+    border-radius: 4px;
+    margin-right: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+</style>
+
+<script>
+const occupiedSeats = {{{occupiedSeats}}};
+const prices = {{{json event.prices}}};
+const eventId = '{{event._id}}';
+let selectedSeats = [];
+
+// Generate seat layout
+function generateSeats(section, rows, cols) {
+    const container = document.getElementById(`${section}-seats`);
+    container.innerHTML = '';
+    
+    for(let r = 1; r <= rows; r++) {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'seat-row';
+        
+        for(let s = 1; s <= cols; s++) {
+            const seatBtn = document.createElement('button');
+            seatBtn.type = 'button';
+            const seatData = {section, row: r, number: s, price: prices[section]};
+            const isOccupied = occupiedSeats.some(o => 
+                o.section === section && o.row === r && o.number === s
+            );
+            
+            seatBtn.className = `seat-btn ${isOccupied ? 'seat-occupied' : 'seat-available'}`;
+            seatBtn.textContent = s;
+            seatBtn.disabled = isOccupied;
+            seatBtn.title = isOccupied ? 'Seat Occupied' : `${section.toUpperCase()} - Row ${r}, Seat ${s}`;
+            
+            if(!isOccupied) {
+                seatBtn.onclick = () => toggleSeat(seatBtn, seatData);
+            }
+            
+            rowDiv.appendChild(seatBtn);
+        }
+        container.appendChild(rowDiv);
+    }
+}
+
+// Toggle seat selection
+function toggleSeat(btn, data) {
+    const idx = selectedSeats.findIndex(s => 
+        s.section === data.section && s.row === data.row && s.number === data.number
+    );
+    
+    if(idx > -1) {
+        selectedSeats.splice(idx, 1);
+        btn.classList.remove('seat-selected');
+        btn.classList.add('seat-available');
+    } else {
+        selectedSeats.push(data);
+        btn.classList.remove('seat-available');
+        btn.classList.add('seat-selected');
+    }
+    
+    updateSummary();
+}
+
+// Update booking summary
+function updateSummary() {
+    const count = selectedSeats.length;
+    const subtotal = selectedSeats.reduce((sum, s) => sum + s.price, 0);
+    const fee = Math.round(subtotal * 0.05);
+    const total = subtotal + fee;
+    
+    // Update seats list
+    const seatsList = document.getElementById('seats-list');
+    if(count === 0) {
+        seatsList.innerHTML = '<em>No seats selected yet</em>';
+    } else {
+        seatsList.innerHTML = selectedSeats.map(s => 
+            `<span class="seat-badge">${s.section.toUpperCase()} R${s.row}S${s.number}</span>`
+        ).join('');
+    }
+    
+    // Update amounts
+    document.getElementById('ticket-count').textContent = count;
+    document.getElementById('subtotal').textContent = `₦${subtotal.toLocaleString()}`;
+    document.getElementById('service-fee').textContent = `₦${fee.toLocaleString()}`;
+    document.getElementById('total').textContent = `₦${total.toLocaleString()}`;
+    document.getElementById('final-total').textContent = `₦${total.toLocaleString()}`;
+    
+    // Enable/disable checkout button
+    document.getElementById('checkout-btn').disabled = count === 0;
+}
+
+// Initialize seats
+generateSeats('vip', 2, 10);
+generateSeats('premium', 3, 12);
+generateSeats('regular', 5, 15);
+
+// Show payment modal
+document.getElementById('checkout-btn').onclick = () => {
+    const modal = new bootstrap.Modal(document.getElementById('paymentModal'));
+    modal.show();
+};
+
+// Handle payment form submission
+document.getElementById('payment-form').onsubmit = async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(e.target);
+    const subtotal = selectedSeats.reduce((sum, s) => sum + s.price, 0);
+    const fee = Math.round(subtotal * 0.05);
+    const total = subtotal + fee;
+    
+    const payBtn = document.getElementById('pay-btn');
+    payBtn.disabled = true;
+    payBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processing...';
+    
+    try {
+        // Step 1: Create booking
+        const bookingRes = await fetch('/bookings/create', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                eventId,
+                seats: selectedSeats,
+                totalAmount: total
+            })
+        });
+        
+        if(!bookingRes.ok) throw new Error('Failed to create booking');
+        const {bookingId} = await bookingRes.json();
+        
+        // Step 2: Initialize Paystack payment
+        const handler = PaystackPop.setup({
+            key: 'pk_test_baf3fd3d0c3cfb4921483fcedcad0f192e7b3543', // Replace with your actual Paystack public key
+            email: formData.get('email'),
+            amount: total * 100, // Amount in kobo
+            currency: 'NGN',
+            ref: 'BK-' + bookingId + '-' + Date.now(),
+            metadata: {
+                custom_fields: [
+                    {
+                        display_name: "Booking ID",
+                        variable_name: "booking_id",
+                        value: bookingId
+                    },
+                    {
+                        display_name: "Customer Name",
+                        variable_name: "customer_name",
+                        value: formData.get('firstName') + ' ' + formData.get('lastName')
+                    },
+                    {
+                        display_name: "Phone",
+                        variable_name: "phone",
+                        value: formData.get('phone')
+                    }
+                ]
+            },
+            callback: function(response) {
+                // Payment successful - confirm booking
+                fetch('/bookings/' + bookingId + '/confirm', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        paymentMethod: 'paystack',
+                        paymentReference: response.reference
+                    })
+                }).then(function() {
+                    window.location.href = '/dashboard?success=true';
+                }).catch(function(err) {
+                    console.error('Confirmation error:', err);
+                    alert('Payment successful but confirmation failed. Please contact support.');
+                });
+            },
+            onClose: function() {
+                payBtn.disabled = false;
+                payBtn.innerHTML = 'Pay with Paystack';
+            }
+        });
+        
+        handler.openIframe();
+        
+    } catch(error) {
+        console.error('Payment error:', error);
+        alert('An error occurred: ' + error.message);
+        payBtn.disabled = false;
+        payBtn.innerHTML = 'Pay with Paystack';
+    }
+};
+</script>

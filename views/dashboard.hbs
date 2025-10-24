@@ -1,0 +1,174 @@
+<div class="page-wrapper">
+    <div class="page-body">
+        <div class="container-xl py-4">
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="mb-1">My Bookings</h1>
+                    <p class="text-muted">Manage your event tickets and reservations</p>
+                </div>
+                <a href="/events" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                    Book New Event
+                </a>
+            </div>
+
+            {{#if bookings.length}}
+            <!-- Success message -->
+            <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+                <div class="d-flex">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
+                    </div>
+                    <div>
+                        <h4 class="alert-title">Booking Confirmed!</h4>
+                        <div class="text-muted">Your payment was successful and tickets have been sent to your email.</div>
+                    </div>
+                </div>
+                <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
+            </div>
+
+            <div class="row g-4">
+                {{#each bookings}}
+                <div class="col-lg-6 col-xl-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-status-top {{#if (eq status 'confirmed')}}bg-success{{else if (eq status 'cancelled')}}bg-danger{{else}}bg-warning{{/if}}"></div>
+                        <div class="card-body">
+                            <!-- Event Header -->
+                            <div class="mb-3">
+                                <h3 class="card-title mb-1">{{eventId.title}}</h3>
+                                <div class="text-muted small mb-2">{{eventId.subtitle}}</div>
+                                <span class="badge {{#if (eq status 'confirmed')}}bg-success{{else if (eq status 'cancelled')}}bg-danger{{else}}bg-warning{{/if}}">
+                                    {{#if (eq status 'confirmed')}}✓{{else if (eq status 'cancelled')}}✗{{else}}⏳{{/if}}
+                                    {{status}}
+                                </span>
+                            </div>
+
+                            <!-- Event Details -->
+                            <div class="card mb-3" style="background-color: #f8f9fa;">
+                                <div class="card-body p-3">
+                                    <div class="row g-2 text-center">
+                                        <div class="col-6">
+                                            <div class="text-muted small mb-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /></svg>
+                                                Event Date
+                                            </div>
+                                            <strong class="d-block">{{formatDate eventId.date}}</strong>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="text-muted small mb-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 7v5l3 3" /></svg>
+                                                Time
+                                            </div>
+                                            <strong class="d-block">{{eventId.time}}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Seats -->
+                            <div class="mb-3">
+                                <div class="text-muted small mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v5a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-5z" /></svg>
+                                    Seats ({{seats.length}})
+                                </div>
+                                <div class="d-flex flex-wrap gap-1">
+                                    {{#each seats}}
+                                    <span class="badge bg-primary-lt">{{section}} R{{row}}S{{number}}</span>
+                                    {{/each}}
+                                </div>
+                            </div>
+
+                            <!-- Booking Reference -->
+                            <div class="mb-3 p-2 bg-light rounded">
+                                <div class="text-muted small">Booking Reference</div>
+                                <div class="font-monospace fw-bold">{{bookingReference}}</div>
+                            </div>
+                        </div>
+
+                        <!-- Card Footer -->
+                        <div class="card-footer bg-white">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted small">Total Amount</span>
+                                <h4 class="text-success mb-0">₦{{totalAmount}}</h4>
+                            </div>
+                            
+                            {{#if (eq status 'confirmed')}}
+                            <div class="btn-list w-100">
+                                <button class="btn btn-success w-100" onclick="downloadTicket('{{_id}}')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 11l5 5l5 -5" /><path d="M12 4l0 12" /></svg>
+                                    Download Ticket
+                                </button>
+                                <button class="btn btn-outline-danger w-100" onclick="cancelBooking('{{_id}}')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M10 10l4 4m0 -4l-4 4" /></svg>
+                                    Cancel Booking
+                                </button>
+                            </div>
+                            {{else if (eq status 'cancelled')}}
+                            <div class="alert alert-danger mb-0">
+                                <div class="text-muted small">This booking has been cancelled</div>
+                            </div>
+                            {{else}}
+                            <div class="alert alert-warning mb-0">
+                                <div class="text-muted small">Payment pending</div>
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            {{else}}
+            <!-- Empty State -->
+            <div class="empty">
+                <div class="empty-img">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="128" height="128" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 5l0 2" /><path d="M15 11l0 2" /><path d="M15 17l0 2" /><path d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2" /></svg>
+                </div>
+                <p class="empty-title">No bookings yet</p>
+                <p class="empty-subtitle text-muted">
+                    Start by booking tickets for upcoming events at Gumel Stadium
+                </p>
+                <div class="empty-action">
+                    <a href="/events" class="btn btn-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                        Browse Events
+                    </a>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</div>
+
+<script>
+// Show success message if redirected from successful payment
+if (window.location.search.includes('success=true')) {
+    document.getElementById('success-alert').style.display = 'block';
+    // Remove the query parameter
+    window.history.replaceState({}, document.title, window.location.pathname);
+}
+
+async function cancelBooking(id) {
+    if(!confirm('Are you sure you want to cancel this booking? This action cannot be undone.')) return;
+    
+    try {
+        const response = await fetch('/bookings/' + id + '/cancel', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'}
+        });
+        
+        if (response.ok) {
+            window.location.reload();
+        } else {
+            alert('Failed to cancel booking. Please try again.');
+        }
+    } catch (error) {
+        console.error('Cancel error:', error);
+        alert('An error occurred. Please try again.');
+    }
+}
+
+function downloadTicket(id) {
+    window.open('/bookings/' + id + '/ticket.pdf', '_blank');
+}
+</script>
