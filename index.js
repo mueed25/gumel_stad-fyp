@@ -9,7 +9,7 @@ const homeRoutes = require('./routes/homeRoutes')
 const { engine } = require('express-handlebars');
 const path = require('path');
 const Users = require('./models/users');
-const port = 3011
+const port = process.env.PORT || 3011;
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
 const Handlebars = require('handlebars');
 
@@ -42,7 +42,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({
-        mongoUrl: 'mongodb://127.0.0.1:27017/final_year_project',
+        mongoUrl: process.env.MONGO_URI,
         collectionName: 'session'
     }),
     cookie: { secure:false, maxAge: 3600000}
