@@ -9,7 +9,7 @@ const path = require('path');
 
 // Middleware to check authentication
 const requireAuth = (req, res, next) => {
-    if (!req.session.userId) return res.redirect('/login');
+    if (!req.session.userId) return res.redirect('/auth/login');
     next();
 };
 
